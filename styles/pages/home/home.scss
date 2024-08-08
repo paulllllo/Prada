@@ -1,0 +1,242 @@
+.home {
+    @extend %page;
+
+    display: flex;
+    // background: $color-contessa;
+    // color: $color-white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+
+}
+
+.home_wrapper {
+
+    &:before,
+    &:after {
+        content: '';
+        height: 40rem;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
+
+    &:before {
+        background: linear-gradient(to bottom, $color-contessa 0%, rgba($color-contessa, 0) 100%);
+        top: 0;
+    }
+
+    &:after {
+        background: linear-gradient(to top, $color-contessa 0%, rgba($color-contessa, 0) 100%);
+        bottom: 0;
+    }
+}
+
+.home_titles {
+    @extend %vertical_titles;
+}
+
+.home_titles_label {
+    @extend %vertical_titles_label;
+}
+
+.home_titles_title {
+    @extend %vertical_titles_title;
+}
+
+.home_gallery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    visibility: hidden;
+    height: 172.5rem;
+    width: 241.8rem + 9rem;
+
+    @include media('<=phone') {
+        padding: 0 1.5rem;
+    }
+}
+
+.home_gallery_media {
+    position: absolute;
+    // height: 60rem;
+    // width: 80rem;
+
+    // padding: 2.5rem;
+    // width: 20%;
+    &:nth-child(1) {
+        height: 41.8rem;
+        left: 9.4rem;
+        top: 16.4rem;
+        width: 27.8rem;
+    }
+
+    &:nth-child(2) {
+        height: 41.8rem;
+        left: 54.1rem;
+        top: 19.2rem;
+        width: 27.8rem;
+    }
+
+    &:nth-child(3) {
+        height: 41.8rem;
+        left: 106.3rem;
+        top: 10.7rem;
+        width: 27.8rem;
+    }
+
+    &:nth-child(4) {
+        height: 60.8rem;
+        left: 154.1rem;
+        top: 0;
+        width: 40.6rem;
+    }
+
+    &:nth-child(5) {
+        height: 41.8rem;
+        left: 9.4rem;
+        top: 16.4rem * 3;
+        width: 27.8rem;
+    }
+
+    &:nth-child(6) {
+        height: 41.8rem;
+        left: 54.1rem;
+        top: 19.2rem;
+        width: 27.8rem;
+    }
+
+    &:nth-child(7) {
+        height: 41.8rem;
+        left: 106.3rem;
+        top: 10.7rem;
+        width: 27.8rem;
+    }
+
+    &:nth-child(8) {
+        height: 60.8rem;
+        left: 154.1rem;
+        top: 0;
+        width: 40.6rem;
+    }
+    
+    &:nth-child(9) {
+        height: 41.8rem;
+        left: 9.4rem;
+        top: 16.4rem * 3;
+        width: 27.8rem;
+    }
+
+    &:nth-child(10) {
+        height: 41.8rem;
+        left: 54.1rem;
+        top: 19.2rem;
+        width: 27.8rem;
+    }
+
+    &:nth-child(11) {
+        height: 41.8rem;
+        left: 106.3rem;
+        top: 10.7rem;
+        width: 27.8rem;
+    }
+
+    &:nth-child(12) {
+        height: 60.8rem;
+        left: 154.1rem;
+        top: 0;
+        width: 40.6rem;
+    }
+
+    &:nth-child(13) {
+        height: 41.8rem;
+        left: 9.4rem;
+        top: 16.4rem * 3;
+        width: 27.8rem;
+    }
+
+    &:nth-child(14) {
+        height: 41.8rem;
+        left: 54.1rem;
+        top: 19.2rem;
+        width: 27.8rem;
+    }
+
+    &:nth-child(15) {
+        height: 41.8rem;
+        left: 106.3rem;
+        top: 10.7rem;
+        width: 27.8rem;
+    }
+
+    // &:nth-child(16) {
+    //     height: 60.8rem;
+    //     left: 154.1rem;
+    //     top: 0;
+    //     width: 40.6rem;
+    // }
+    
+
+
+    @include media('<=phone') {
+        padding: 1.5rem;
+        width: 50%;
+
+        // &--2,
+        // &--3,
+        // &--4,
+        // &--5 {
+        //     transform: translateY(0);
+        // }
+    }
+}
+
+.home_gallery_media_image {
+    // @extend %cover;
+
+    // object-fit: cover;
+
+    display: block;
+    width: 100%;
+}
+
+.home_link {
+    @extend %description-14;
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    height: 6rem;
+    width: 28.8rem;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+
+    span {
+        display: inline-block;
+        line-height: 1;
+        position: relative;
+        vertical-align: middle;
+    }
+
+    @include media('<phone') {
+        bottom: 7.5rem;
+        height: 13.7rem;
+        width: 55rem;
+    }
+}
+
+.home_link_icon {
+    @extend %cover;
+}
+
+.home_link_icon svg {
+    position: absolute;
+}

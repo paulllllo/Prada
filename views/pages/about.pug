@@ -1,0 +1,48 @@
+extends ../base.pug
+
+block variables
+    - var template = 'about'
+
+block content
+    .about(data-background="#B2B8C3", data-color="#37384C")
+        .about_wrapper
+            section.about_gallery
+                .about_gallery_wrapper
+                    each media in about.data.gallery
+                        figure.about_gallery_media
+                            img.about_gallery_media_image(alt=media.image.alt data-src=media.image.url)
+            each slice in about.data.body
+                if slice.slice_type == 'title'
+                    h2.about_title(data-animation="title")!=slice.primary.text.replace(/\n/g, '<br>')
+
+                if slice.slice_type == 'content'
+                    section.about_content(class=`${slice.primary.type == 'Left' ? 'about_content--left' : 'about_content--right'}`)
+                        .about_content_wrapper
+                            .about_content_text_wrapper
+                                p.about_content_label(data-animation="label")=slice.primary.label
+
+                                .about_content_desc!=prismicH.asHTML(slice.primary.description).replace(/<p>/g, '<p data-animation="paragraph">')
+
+                            figure.about_content_media
+                                img.about_content_media_image(alt=slice.primary.image.alt data-src=slice.primary.image.url)
+
+                if slice.slice_type == 'highlight'
+                    section.about_highlight
+                        .about_highlight_wrapper
+                            if slice.primary.label
+                                .about_highlight_label(data-animation="label")=slice.primary.label
+
+                            h3.about_highlight_title(data-animation="highlight")=slice.primary.title
+
+                            .about_higlight_medias
+                                each media in slice.items
+                                    figure.about_higlight_media
+                                        img.about_higlight_media_image(alt=media.image.alt data-src=media.image.url)
+
+                if slice.slice_type == 'gallery'
+                    section.about_gallery
+                        .about_gallery_wrapper
+                            each media in slice.items
+                                figure.about_gallery_media
+                                    img.about_gallery_media_image(alt=media.image.alt data-src=media.image.url)
+
