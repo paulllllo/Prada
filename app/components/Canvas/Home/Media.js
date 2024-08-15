@@ -21,6 +21,7 @@ export default class {
         this.createTexture()
         this.createProgram()
         this.createMesh()
+
         this.createBounds({
             sizes: this.sizes
         })
@@ -123,7 +124,6 @@ export default class {
     }
 
     update (scroll, uSpeed) {
-        if (!this.bounds) return
         this.updateX(scroll.x)
         this.updateY(scroll.y)
 

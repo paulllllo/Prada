@@ -5,10 +5,13 @@ import GSAP from 'gsap'
 import Prefix from 'prefix'
 
 export default class Collections {
-    constructor ({ gl, scene, sizes }) {
+    constructor ({ gl, scene, sizes, transition }) {
+        this.id = 'collections'
+
         this.gl = gl
         this.scene = scene
         this.sizes = sizes
+        this.transition = transition
 
         this.group = new Transform()
 
@@ -34,6 +37,10 @@ export default class Collections {
 
         this.createGeometry()
         this.createGallery()
+
+        this.onResize({
+            sizes: this.sizes
+        })
 
         this.group.setParent(this.scene)
 
@@ -62,6 +69,11 @@ export default class Collections {
         map(this.medias, (media) => {
             media.show()
         })
+        if (this.transition) {
+            this.transition.animate(this.medias[0].mesh, _ => {
+
+            })
+        }
     }
 
     hide () {
@@ -125,8 +137,6 @@ export default class Collections {
 
     //          Loop
     update () {
-        if (!this.bounds) return
-
         this.scroll.target = GSAP.utils.clamp(-this.scroll.limit, 0, this.scroll.target)
 
         this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.lerp)

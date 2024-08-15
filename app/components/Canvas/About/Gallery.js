@@ -15,9 +15,6 @@ export default class Gallery {
         this.scene = scene
         this.sizes = sizes
 
-        this.group = new Transform()
-        this.createMedias()
-
         this.scroll = {
             current: 0,
             target: 0,
@@ -25,6 +22,13 @@ export default class Gallery {
             velocity: 0.5,
             lerp: 0.1
         }
+
+        this.group = new Transform()
+        this.createMedias()
+
+        this.onResize({
+            sizes: this.sizes
+        })
 
         this.group.setParent(this.scene)
     }
@@ -85,8 +89,6 @@ export default class Gallery {
 
     //          Loop
     update (scroll) {
-        if (!this.bounds) return
-
         const distance = (scroll.current - scroll.target) * 0.1
         const y = scroll.current / window.innerHeight
 

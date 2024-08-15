@@ -5,6 +5,8 @@ import Collections from './Collections/index.js'
 import Transition from './transition.js'
 import Detail from './Detail/index.js'
 
+// import GSAP from 'gsap'
+
 export default class Canvas {
     constructor ({ template }) {
         this.template = template
@@ -95,7 +97,8 @@ export default class Canvas {
         this.collections = new Collections({
             gl: this.gl,
             scene: this.scene,
-            sizes: this.sizes
+            sizes: this.sizes,
+            transition: this.transition
         })
     }
 
@@ -111,7 +114,8 @@ export default class Canvas {
         this.detail = new Detail({
             gl: this.gl,
             scene: this.scene,
-            sizes: this.sizes
+            sizes: this.sizes,
+            transition: this.transition
         })
     }
 
@@ -149,6 +153,8 @@ export default class Canvas {
         this.fromDetailToCollections = this.template === 'detail' && url.indexOf('collections') > -1
 
         if (this.fromCollectionsToDetail || this.fromDetailToCollections) {
+            console.log('fromCollectionsToDetail', this.fromCollectionsToDetail)
+            console.log('fromDetailToCollections', this.fromDetailToCollections)
             this.transition = new Transition({
                 collections: this.collections,
                 url,
@@ -156,31 +162,38 @@ export default class Canvas {
                 scene: this.scene,
                 sizes: this.sizes
             })
+
+            this.transition.setElement(this.collections || this.detail)
+            console.log('Detail***', this.detail)
         }
     }
 
     onPageChangeEnd (template) {
+        // if (this.transition) {
+        //     this.transition.animate(this.collections)
+        // }
+
         if (template === 'collections') {
             this.createCollections()
-        } else {
+        } else if (this.collections) {
             this.destroyCollections()
         }
 
-        if (template === 'Detail') {
+        if (template === 'detail') {
             this.createDetail()
-        } else {
+        } else if (this.detail) {
             this.destroyDetail()
         }
 
         if (template === 'about') {
             this.createAbout()
-        } else {
+        } else if (this.about) {
             this.destroyAbout()
         }
 
         if (template === 'home') {
             this.createHome()
-        } else {
+        } else if (this.home) {
             this.destroyHome()
         }
     }

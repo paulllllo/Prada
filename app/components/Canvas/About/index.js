@@ -13,6 +13,10 @@ export default class Home {
         this.createGeometry()
         this.createGalleries()
 
+        this.onResize({
+            sizes: this.sizes
+        })
+
         this.group.setParent(this.scene)
         this.show()
     }

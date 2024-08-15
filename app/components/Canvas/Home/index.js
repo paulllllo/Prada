@@ -45,9 +45,9 @@ export default class Home {
         this.createGeometry()
         this.createGallery()
 
-        // this.onResize({
-        //     sizes: this.sizes
-        // })
+        this.onResize({
+            sizes: this.sizes
+        })
 
         this.group.setParent(this.scene)
 

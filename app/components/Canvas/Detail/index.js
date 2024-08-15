@@ -1,21 +1,36 @@
 // import GSAP from 'gsap'
 import { Mesh, Plane, Program } from 'ogl'
 
-import vertex from '../../../shaders/collections-vertex.glsl'
-import fragment from '../../../shaders/collections-fragment.glsl'
+import GSAP from 'gsap'
+
+import vertex from '../../../shaders/plane-vertex.glsl'
+import fragment from '../../../shaders/plane-fragment.glsl'
 
 export default class {
-    constructor ({ gl, scene, sizes }) {
+    constructor ({ gl, scene, sizes, transition }) {
+        this.id = 'detail'
+
         this.element = document.querySelector('.detail_media_image')
         this.gl = gl
         this.scene = scene
         this.sizes = sizes
+        this.transition = transition
 
         this.geometry = new Plane(this.gl)
 
         this.createTexture()
         this.createProgram()
         this.createMesh()
+
+        this.createBounds({
+            sizes: this.sizes
+        })
+
+        this.onResize(this.sizes)
+
+        this.show()
+        console.log('Detail inside detail', this.element)
+        console.log('sizes inside details', sizes)
     }
 
     createTexture () {
@@ -46,7 +61,7 @@ export default class {
     }
 
     createBounds ({ sizes }) {
-        this.sizes = sizes
+        // this.sizes = sizes
 
         this.bounds = this.element.getBoundingClientRect()
 
@@ -58,7 +73,15 @@ export default class {
     //          Show
 
     show () {
-
+        if (this.transition) {
+            this.transition.animate(this.mesh, _ => {
+                this.program.uniforms.uAlpha.value = 1
+            })
+        } else {
+            GSAP.to(this.program.uniforms.uAlpha, {
+                value: 1
+            })
+        }
     }
 
     hide () {
@@ -108,6 +131,6 @@ export default class {
     }
 
     destroy () {
-
+        this.scene.removeChild(this.mesh)
     }
 }

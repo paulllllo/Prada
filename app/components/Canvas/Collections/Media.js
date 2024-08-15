@@ -28,6 +28,7 @@ export default class {
         this.createTexture()
         this.createProgram()
         this.createMesh()
+
         this.createBounds({
             sizes: this.sizes
         })
@@ -116,7 +117,7 @@ export default class {
 
         this.x = (this.bounds.left + x) / window.innerWidth
 
-        this.mesh.position.x = -(this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) + this.extra.x
+        this.mesh.position.x = (-this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) + this.extra.x
     }
 
     updateY (y = 0) {
@@ -128,7 +129,6 @@ export default class {
     }
 
     update (scroll, index) {
-        if (!this.bounds) return
         this.updateX(scroll)
         this.updateY()
 
