@@ -66,12 +66,28 @@ export default class Collections {
 
     //          Show
     show () {
-        map(this.medias, (media) => {
-            media.show()
-        })
         if (this.transition) {
-            this.transition.animate(this.medias[0].mesh, _ => {
+            const { src } = this.transition.mesh.program.uniforms.tMap.value.image
+            const texture = window.TEXTURES[src]
+            const media = this.medias.find(media => media.texture === texture)
+            const scroll = -media.bounds.left - media.bounds.width / 2 + (window.innerWidth / 2)
 
+            this.update()
+
+            this.transition.animate(this.media.mesh, _ => {
+                this.media.opacity.multiplier = 1
+
+                map(this.medias, item => {
+                    if (item !== this.media) {
+                        item.show()
+                    }
+                })
+
+                this.scroll.current = this.scroll.target = this.scroll.start = scroll
+            })
+        } else {
+            map(this.medias, (media) => {
+                media.show()
             })
         }
     }
@@ -133,6 +149,8 @@ export default class Collections {
         })
 
         this.titlesElement.style[this.transformPrefix] = `translateY(${70 * selectedCollection}%) translate(-50%, -50%) rotate(-90deg)`
+
+        this.media = this.medias[this.index]
     }
 
     //          Loop

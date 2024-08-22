@@ -30,6 +30,8 @@ export default class {
         const image = this.element.querySelector('img')
 
         this.texture = window.TEXTURES[image.getAttribute('data-src')]
+
+        // console.log('texture in about media ** ', this.texture)
     }
 
     createProgram () {
@@ -56,6 +58,9 @@ export default class {
         this.sizes = event.sizes
 
         this.bounds = this.element.getBoundingClientRect()
+
+        // console.log('bounds in createbounds ** ', this.bounds)
+        console.log('mesh in createbounds ** ', this.mesh)
 
         this.updateScale()
         this.updateX()

@@ -56,8 +56,9 @@ export default class {
             program: this.program
         })
 
+        this.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03)
+
         this.mesh.setParent(this.scene)
-        // this.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03)
     }
 
     createBounds ({ sizes }) {
@@ -85,7 +86,9 @@ export default class {
     }
 
     hide () {
-
+        // GSAP.to(this.program.uniforms.uAlpha, {
+        //     value: 0
+        // })
     }
 
     //              Events
@@ -131,6 +134,6 @@ export default class {
     }
 
     destroy () {
-        this.scene.removeChild(this.mesh)
+        this.mesh.setParent(null)
     }
 }

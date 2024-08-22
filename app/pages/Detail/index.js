@@ -1,6 +1,8 @@
 import Page from 'classes/page.js'
 import Button from '../../classes/Button.js'
 
+import GSAP from 'gsap'
+
 export default class Detail extends Page {
     constructor () {
         super({
@@ -21,6 +23,21 @@ export default class Detail extends Page {
         })
 
         this.button.addEventListeners()
+    }
+
+    show () {
+        const timeline = GSAP.timeline({
+            delay: 1.5
+        })
+
+        timeline.fromTo(this.element, {
+            autoAlpha: 0
+        },
+        {
+            autoAlpha: 1
+        })
+
+        super.show(timeline)
     }
 
     destroy () {

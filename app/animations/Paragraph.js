@@ -7,13 +7,16 @@ export default class Paragraph extends Animation {
     constructor ({ element, elements }) {
         super({ element, elements })
 
+        this.element = element
+
         // this.elementSpans = split({ element: this.element, append: true })
 
         // this.elementSpans = this.element.querySelectorAll('span span')
-        // console.log('elementSpans', this.elementSpans)
+        // console.log('element in paragraph ** ', this.element)
     }
 
     animateIn () {
+        console.log('animateIn paragraph')
         GSAP.fromTo(this.element,
             {
                 // y: '100%',
@@ -22,10 +25,10 @@ export default class Paragraph extends Animation {
             {
                 autoAlpha: 1,
                 ease: 'expo.out',
-                delay: 0.5,
-                duration: 1.2
+                delay: 0.1,
+                duration: 0.5
                 // y: '0%'
-            }, 0)
+            })
     }
 
     animateOut () {
