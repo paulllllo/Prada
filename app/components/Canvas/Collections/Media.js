@@ -109,6 +109,8 @@ export default class {
 
         this.mesh.scale.x = this.sizes.width * this.width
         this.mesh.scale.y = this.sizes.height * this.height
+
+        console.log('Mesh scale ** ', this.mesh.scale)
     }
 
     updateX (x = 0) {
@@ -131,6 +133,12 @@ export default class {
     update (scroll, index) {
         this.updateX(scroll)
         this.updateY()
+
+        const amplitude = 0.1
+        const frequency = 1
+
+        this.mesh.rotation.z = -0.02 * Math.PI * Math.sin(this.index / frequency)
+        this.mesh.position.y = amplitude * Math.sin(this.index / frequency)
 
         this.opacity.target = this.index === index ? 1 : 0.4
         this.opacity.current = GSAP.utils.interpolate(this.opacity.current, this.opacity.target, this.opacity.lerp)

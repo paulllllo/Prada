@@ -1,11 +1,10 @@
 #define PI 3.1415926535897932384626433832795
 
+attribute vec3 position;
 attribute vec2 uv;
 
-attribute vec3 position;
-
 uniform float uSpeed;
-uniform vec4 uViewportSizes;
+uniform vec2 uViewportSizes;
 
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;

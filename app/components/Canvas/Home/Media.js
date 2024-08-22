@@ -25,6 +25,8 @@ export default class {
         this.createBounds({
             sizes: this.sizes
         })
+
+        this.onResize({ sizes: this.sizes })
     }
 
     createTexture () {
@@ -39,9 +41,9 @@ export default class {
             vertex,
             uniforms: {
                 uAlpha: { value: 0 },
-                tMap: { value: this.texture },
+                uSpeed: { value: 0 },
                 uViewportSizes: { value: [this.sizes.width, this.sizes.height] },
-                uSpeed: { value: 0 }
+                tMap: { value: this.texture }
             }
         })
     }
@@ -60,6 +62,7 @@ export default class {
         this.sizes = sizes
 
         this.bounds = this.element.getBoundingClientRect()
+        // this.bounds.height = 200
 
         this.updateScale()
         this.updateX()
@@ -72,7 +75,7 @@ export default class {
         GSAP.fromTo(this.program.uniforms.uAlpha, {
             value: 0
         }, {
-            value: 1
+            value: 0.4
         })
     }
 
@@ -92,8 +95,8 @@ export default class {
 
         this.createBounds(sizes)
 
-        this.updateX(scroll.x ? scroll.x : 0)
-        this.updateY(scroll.y ? scroll.y : 0)
+        this.updateX(scroll && scroll.x)
+        this.updateY(scroll && scroll.y)
     }
 
     //  Loops
@@ -107,12 +110,11 @@ export default class {
     }
 
     updateX (x = 0) {
-        // console.log('Inside updateX **** sizes', this.sizes)
         // if (!this.sizes) return
 
         this.x = (this.bounds.left + x) / window.innerWidth
 
-        this.mesh.position.x = -(this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) + this.extra.x
+        this.mesh.position.x = (-this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) + this.extra.x
     }
 
     updateY (y = 0) {

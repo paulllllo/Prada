@@ -30,7 +30,7 @@ export default class Preloader extends Component {
         })
 
         this.elements.titleSpans = this.elements.title.querySelectorAll('span span')
-        console.log('titleSpans', this.elements.titleSpans)
+        // console.log('titleSpans', this.elements.titleSpans)
 
         this.createLoader()
     }
@@ -40,6 +40,8 @@ export default class Preloader extends Component {
             const texture = new Texture(this.canvas.gl, {
                 generateMipmaps: false
             })
+
+            // console.log('image inside createloader ** ', image)
 
             const media = new window.Image()
             media.crossOrigin = 'anonymous'
