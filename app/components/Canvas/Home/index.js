@@ -55,7 +55,10 @@ export default class Home {
     }
 
     createGeometry () {
-        this.geometry = new Plane(this.gl)
+        this.geometry = new Plane(this.gl, {
+            heightSegments: 20,
+            widthSegments: 20
+        })
     }
 
     createGallery () {
@@ -73,12 +76,14 @@ export default class Home {
 
     //          Show
     show () {
+        // this.group.setParent(this.scene)
         map(this.medias, (media) => {
             media.show()
         })
     }
 
     hide () {
+        // this.group.setParent(null)
         map(this.medias, (media) => {
             media.hide()
         })
@@ -95,11 +100,13 @@ export default class Home {
 
         this.galleryBounds = this.galleryElement.getBoundingClientRect()
 
+        console.log('galleryBounds ', this.galleryBounds)
+
         this.sizes = event.sizes
 
         this.gallerySizes = {
-            width: this.galleryWidth = this.galleryBounds.width / window.innerWidth * this.sizes.width,
-            height: this.galleryHeight = this.galleryBounds.height / window.innerHeight * this.sizes.height
+            width: (this.galleryBounds.width / window.innerWidth) * this.sizes.width,
+            height: (this.galleryBounds.height / window.innerHeight) * this.sizes.height
         }
 
         this.scroll.x = this.x.target = 0
@@ -134,7 +141,7 @@ export default class Home {
 
     //          Loop
     update () {
-        if (!this.galleryBounds) return
+        // if (!this.galleryBounds) return
 
         this.speed.current = GSAP.utils.interpolate(this.speed.current, this.speed.target, this.speed.lerp)
 

@@ -98,14 +98,13 @@ class App {
             this.content.setAttribute('data-template', this.template)
             this.content.innerHTML = divContent.innerHTML
 
+            this.navigation.onChange(this.template)
             this.canvas.onPageChangeEnd(this.template)
 
             this.page = this.pages[this.template]
             this.page.create()
             this.onResize()
             this.page.show()
-
-            this.navigation.onChange(this.template)
 
             this.addLinkListeners()
         } else {

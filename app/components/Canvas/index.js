@@ -156,7 +156,7 @@ export default class Canvas {
             console.log('fromCollectionsToDetail', this.fromCollectionsToDetail)
             console.log('fromDetailToCollections', this.fromDetailToCollections)
             this.transition = new Transition({
-                collections: this.collections,
+                // collections: this.collections,
                 url,
                 gl: this.gl,
                 scene: this.scene,

@@ -94,7 +94,7 @@ export default class Page {
     }
 
     createAsyncLoad () {
-        if (!this.lazyLoaders) return
+        // if (!this.lazyLoaders) return
         this.lazyLoaders = [...this.elements.lazyLoaders].map(element => {
             // console.log('in map, About to start', element)
             return new AsyncLoad({
@@ -104,21 +104,25 @@ export default class Page {
         // console.log('lazyloaders after map', this.lazyLoaders)
     }
 
-    show () {
+    show (animation) {
         // console.log('show')
         return new Promise(resolve => {
-            this.animationIn = GSAP.timeline()
-            colorsChanger.change({
-                backgroundColor: this.element.getAttribute('data-background'),
-                color: this.element.getAttribute('data-color')
-            })
+            if (animation) {
+                this.animationIn = animation
+            } else {
+                this.animationIn = GSAP.timeline()
+                colorsChanger.change({
+                    backgroundColor: this.element.getAttribute('data-background'),
+                    color: this.element.getAttribute('data-color')
+                })
 
-            this.animationIn.fromTo(this.element, {
-                autoAlpha: 0
-            },
-            {
-                autoAlpha: 1
-            })
+                this.animationIn.fromTo(this.element, {
+                    autoAlpha: 0
+                },
+                {
+                    autoAlpha: 1
+                })
+            }
 
             this.animationIn.call(_ => {
                 this.addEventListeners()
